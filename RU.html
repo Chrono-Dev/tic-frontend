@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Code Tracker</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <h1>Bem-vindo ao QR Code Tracker</h1>
+  <script>
+    // Categoria específica para esta página
+    const locationCategory = "RU";
+
+    function getUserIP() {
+      fetch("https://api.ipify.org?format=json")
+        .then(response => response.json())
+        .then(data => {
+          console.log("IP do usuário:", data.ip);
+          sendIPToBackend(data.ip, locationCategory);
+        })
+        .catch(error => console.error("Erro ao obter IP:", error));
+    }
+
+    function sendIPToBackend(ip, location) {
+      fetch("http://localhost:3001/qr_code_accesses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_ip: ip, location: location }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.message || data.error);
+        })
+        .catch(error => console.error("Erro ao enviar IP:", error));
+    }
+
+    window.onload = getUserIP;
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+body {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    min-height: 100vh; /* Define a altura mínima do body para a altura da tela */
+    margin: 0;
+    font-family: Arial, sans-serif; /* Fonte padrão opcional */
+    text-align: center; /* Centraliza o texto dentro dos elementos */
+  }
