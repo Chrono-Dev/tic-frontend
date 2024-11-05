@@ -18,7 +18,7 @@ function sendIPToBackend(ip) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({user_ip: ip, location: 'RU'}),
+    body: JSON.stringify({user_ip: ip, location: 'RU', proAI: true}),
   })
     .then(response => response.json())
     .then(data => {
