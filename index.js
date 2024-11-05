@@ -13,7 +13,7 @@ function getUserIP() {
 
 // Função para enviar o IP para o backend
 function sendIPToBackend(ip) {
-  fetch("http://localhost:3001/qr_code_accesses", {
+  fetch("https://tic-backend.onrender.com/qr_code_accesses", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
