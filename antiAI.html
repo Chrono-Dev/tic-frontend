@@ -18,7 +18,13 @@
   
   <script>
     // Categoria específica para esta página
-    const locationCategory = "RU";
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Categoria específica da URL (exemplo: ?location=RU)
+    const locationCategory = getUrlParameter("location");
 
     function getUserIP() {
       fetch("https://api.ipify.org?format=json")
