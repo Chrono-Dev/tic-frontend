@@ -10,18 +10,22 @@ body {
   }
 
 .square{
-  width: 615px;
-  height: 675px;
+  width: 90%;
+  height: auto;
   display: flex;
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
   background-color: #4E48FD;
   border-radius: 5px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .textSquare{
-  width: 570px;
-  height: 535px;
+  width: 90%;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: space-between; /* Centraliza verticalmente */
