@@ -6,4 +6,40 @@ body {
     margin: 0;
     font-family: Arial, sans-serif; /* Fonte padrão opcional */
     text-align: center; /* Centraliza o texto dentro dos elementos */
+    background-color: #111030;
   }
+
+.square{
+  width: 615px;
+  height: 675px;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  background-color: #4E48FD;
+  border-radius: 5px;
+}
+
+.textSquare{
+  width: 570px;
+  height: 535px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: space-between; /* Centraliza verticalmente */
+  flex-direction: column;
+}
+
+.textTitle{
+  font-family: 'Inter';
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+.textBody{
+  font-family: 'Inter';
+  color: white;
+  font-size: 26px;
+  text-align: left;
+  font-weight:lighter;
+}
