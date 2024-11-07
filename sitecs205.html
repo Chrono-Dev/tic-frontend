@@ -85,7 +85,7 @@
     function sendTextareaContent() {
       const textareaContent = document.getElementById("textareaInfo").value;
       if (userId) {
-        fetch(`https://tic-backend.onrender.com/qr_code_accesses/${userId}/add_content`, {
+        fetch(`https://tic-backend.onrender.com/qr_code_accesses/${userId}/add_comment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
