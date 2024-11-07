@@ -12,20 +12,35 @@
     <div class="square">
       <div class="textSquare">
             <div class="textTitle">Olá</div>
-            <div class="textBody">Você acaba de <strong>participar</strong> de uma <strong>pesquisa</strong> sobre o engajamento dos estudantes com temas de <strong>conscientização sobre tecnologia</strong> e <strong>comunicação no campus</strong>, em comparação ao interesse em <strong>conteúdos de entretenimento e ganho pessoal</strong></div>
-            <div class="textBody" style="padding-top: 30px;">Desenvolvido por alunos de Comunicação Social - <strong>Midialogia</strong> para a disciplina de Tecnologia e Informação (CS205), este projeto usa <strong style="color: #51EEFF">Mídias Táticas</strong> para analisar o posicionamento dos estudantes entre duas escolhas opostas: compreender os riscos das inteligências artificiais ou explorar truques de uso inconsequente dessas ferramentas na formação.</div>
-            <div class="textBody" style="padding-top: 30px;">ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA ATUMALACA </div>
+            <div class="textBody"><strong id="proAI-text" style="display: none;">Na verdade, não oferecemos ferramentas gratuitas de IA para aprimorar a produção científica.</strong> O cartaz que você acabou de usar para acessar o QR code faz parte de uma pesquisa desenvolvida por alunos da graduação em Comunicação Social (Midialogia) como parte do trabalho final da disciplina CS205: Tecnologias da Informação e Comunicação. Nosso objetivo era desenvolver um projeto de mídia com viés crítico relacionado a um dos temas estudados na disciplina. Para tal, escolhemos o desenvolvimento de um projeto que utilizasse <strong style="color: #51EEFF">Mídias Táticas</strong> a fim de levantar questões acerca do <strong> exponencial do desenvolvimento e da aplicação de inteligências artificiais.</strong></div>
         </div>
+    </div>
+    <div class="square" style="margin-top: -5px; background-color: rgba(1, 87, 20, 0.884); flex-direction: column; justify-content: space-between; gap: 2vh;">
+      <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 1vh;">
+        <div class="photo" style="background-image: url(1.png);"></div>
+        <div class="photo" style="background-image: url(3.png);"></div>
+        <div class="photo" style="background-image: url(5.png);"></div>
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 1vh;">
+        <div class="photo" style="background-image: url(2.png);"></div>
+        <div class="photo" style="background-image: url(4.png);"></div>
+        <div class="photo" style="background-image: url(6.png);"></div>
+      </div>
     </div>
     <div class="square" style="margin-top: -5px; background-color: rgba(87, 1, 1, 0.884);">
       <div class="textSquare">
-        <div class="textTitle">Mídias Digitais</div>
-        <div class="textBody">Você acaba de <strong>participar</strong> de uma <strong>pesquisa</strong> sobre o engajamento dos estudantes com temas de <strong>conscientização sobre tecnologia</strong> e <strong>comunicação no campus</strong>, em comparação ao interesse em <strong>conteúdos de entretenimento e ganho pessoal</strong></div>
-      </div>
+        <div class="textTitle">Mas, afinal, o que são Mídia Táticas (MT)?</div>
+        <div class="textBody">O termo surgiu em meados dos anos 1990 para se referir à apropriação de meios de comunicação e a mobilizações sociais que procuram articular produções simbólicas a tecnologias de produção e difusão de informações. Em outras palavras, mídias táticas são práticas de mídia que procuram produzir conteúdos culturais críticos e manifestações políticas através da subversão de meios de comunicação, distanciando-se de determinada ordem social corrente. 
+          Em nosso projeto, através do uso dos cartazes e do QR Code, procuramos sensibilizar o público para a questão cada vez mais latente da aplicação indiscriminada das várias inteligências artificiais existentes. Será que a circulação de cartazes que procuram criticar e apontar os possíveis problemas éticos/políticos decorrentes do uso de IA têm a mesma repercussão que a divulgação da oferta de IA’s que, no âmbito individual, podem oferecer aumento da produtividade e aprimoramento da realização de tarefas? É para essa relação entre problemas coletivos e ganhos individuais que procuramos chamar a atenção com nosso projeto.</div>
+          <div class="textTitle" style="margin-top: 30px;">Agradecemos sua participação! Se quiser, conte o que achou do nosso trabalho na caixa de mensagens abaixo.</div>
+          <textarea id="textareaInfo" maxlength="255" class="textarea-info" placeholder="Insira aqui seu comentario."></textarea>
+          <button onclick="sendTextareaContent()" class="button-enviar">ENVIAR</button>
+        </div>
     </div>
  </div>
   
   <script>
+    let userId;
     // Categoria específica para esta página
     function getUrlParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -35,6 +50,10 @@
     // Categoria específica da URL (exemplo: ?location=RU)
     const locationCategory = getUrlParameter("location");
     const proAICategory = getUrlParameter("proAI");
+
+    if (proAICategory) {
+      document.getElementById("proAI-text").style.display = "block";
+    }
 
     function getUserIP() {
       fetch("https://api.ipify.org?format=json")
@@ -57,9 +76,30 @@
         .then(response => response.json())
         .then(data => {
           console.log(data.message || data.error);
+          userId = data.id;  // Armazena o ID retornado
         })
         .catch(error => console.error("Erro ao enviar IP:", error));
     }
+
+    function sendTextareaContent() {
+      const textareaContent = document.getElementById("textareaInfo").value;
+      if (userId) {
+        fetch(`https://tic-backend.onrender.com/qr_code_accesses/${userId}/add_content`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ content: textareaContent }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Texto enviado:", data.message || data.error);
+        })
+        .catch(error => console.error("Erro ao enviar conteúdo:", error));
+      } else {
+        console.error("ID do usuário não definido");
+      }
+   }
 
     window.onload = getUserIP;
   </script>
