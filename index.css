@@ -92,7 +92,7 @@ body {
   background-color: black;
   color: white;
   font-family: 'Inter';
-  font-size: 26px;
+  font-size: clamp(14px, 3vw, 24px); /* Ajusta entre 14px e 24px conforme o tamanho da tela */
   display: flex;
   align-items: center;
   border-radius: 5px;
