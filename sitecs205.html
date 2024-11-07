@@ -94,6 +94,7 @@
         .then(response => response.json())
         .then(data => {
           console.log("Texto enviado:", data.message || data.error);
+          document.getElementById("textareaInfo").value = "";
         })
         .catch(error => console.error("Erro ao enviar conteúdo:", error));
       } else {
