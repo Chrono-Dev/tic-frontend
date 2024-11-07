@@ -6,8 +6,9 @@ body {
     margin: 0;
     font-family: Arial, sans-serif; /* Fonte padrão opcional */
     text-align: center; /* Centraliza o texto dentro dos elementos */
-    background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(49,52,131,1) 100%);
+    background-image: url(background.jpg);
+    background-size: contain;
+    background-size: cover;
   }
 
 .square{
