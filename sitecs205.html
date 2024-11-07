@@ -75,10 +75,8 @@
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data.message || data.error);
-          console.log("HERE");
-          console.log(data);
-          userId = data.id;  // Armazena o ID retornado
+          console.log(data)
+          userId = data.id;
         })
         .catch(error => console.error("Erro ao enviar IP:", error));
     }
