@@ -102,3 +102,11 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
+.check{
+  width: clamp(70px, 20vw, 120px); /* Ajusta a largura conforme a tela */
+  height: clamp(70px, 25vh, 120px); /* Ajusta a altura conforme a tela */    /* Defina a altura desejada */
+  background-image: url("checkmark.svg");
+  background-size: cover; /* Ajusta o SVG ao tamanho do elemento */
+  align-self: center;
+}

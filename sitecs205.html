@@ -34,7 +34,8 @@
           Em nosso projeto, através do uso dos cartazes e do QR Code, procuramos sensibilizar o público para a questão cada vez mais latente da aplicação indiscriminada das várias inteligências artificiais existentes. Será que a circulação de cartazes que procuram criticar e apontar os possíveis problemas éticos/políticos decorrentes do uso de IA têm a mesma repercussão que a divulgação da oferta de IA’s que, no âmbito individual, podem oferecer aumento da produtividade e aprimoramento da realização de tarefas? É para essa relação entre problemas coletivos e ganhos individuais que procuramos chamar a atenção com nosso projeto.</div>
           <div class="textTitle" style="margin-top: 30px;">Agradecemos sua participação! Se quiser, conte o que achou do nosso trabalho na caixa de mensagens abaixo.</div>
           <textarea id="textareaInfo" maxlength="255" class="textarea-info" placeholder="Insira aqui seu comentario."></textarea>
-          <button onclick="sendTextareaContent()" class="button-enviar">ENVIAR</button>
+          <button onclick="sendTextareaContent()" id='button-enviar' class="button-enviar">ENVIAR</button>
+          <div style="display: none;" id="check" class="check" ></div>
         </div>
     </div>
  </div>
@@ -51,8 +52,7 @@
     const locationCategory = getUrlParameter("location");
     const proAICategory = getUrlParameter("proAI");
 
-    console.log(proAICategory)
-    console.log(typeof proAICategory)
+
     if (proAICategory == "true") {
       document.getElementById("proAI-text").style.display = "block";
     }
@@ -96,7 +96,9 @@
         .then(response => response.json())
         .then(data => {
           console.log("Texto enviado:", data.message || data.error);
-          document.getElementById("textareaInfo").value = "";
+          document.getElementById("textareaInfo").style.display = "none";
+          document.getElementById("button-enviar").style.display = "none";
+          document.getElementById("check").style.display = "block";
         })
         .catch(error => console.error("Erro ao enviar conteúdo:", error));
       } else {
