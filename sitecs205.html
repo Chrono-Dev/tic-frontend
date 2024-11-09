@@ -51,7 +51,7 @@
     const locationCategory = getUrlParameter("location");
     const proAICategory = getUrlParameter("proAI");
 
-    if (proAICategory) {
+    if (proAICategory == 'true') {
       document.getElementById("proAI-text").style.display = "block";
     }
 
