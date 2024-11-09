@@ -51,7 +51,11 @@
     const locationCategory = getUrlParameter("location");
     const proAICategory = getUrlParameter("proAI");
 
-
+    console.log(proAICategory)
+    console.log(typeof proAICategory)
+    if (proAICategory == "true") {
+      document.getElementById("proAI-text").style.display = "block";
+    }
 
     function getUserIP() {
       fetch("https://api.ipify.org?format=json")
