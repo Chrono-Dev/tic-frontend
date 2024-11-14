@@ -36,6 +36,7 @@
           <textarea id="textareaInfo" maxlength="255" class="textarea-info" placeholder="Insira aqui seu comentario."></textarea>
           <button onclick="sendTextareaContent()" id='button-enviar' class="button-enviar">ENVIAR</button>
           <div style="display: none;" id="check" class="check" ></div>
+          <div style="display: none;" id="loading" class="loading" ></div>
         </div>
     </div>
  </div>
@@ -85,26 +86,45 @@
 
     function sendTextareaContent() {
       const textareaContent = document.getElementById("textareaInfo").value;
-      if (userId && textareaContent != "") {
-        fetch(`https://tic-backend.onrender.com/qr_code_accesses/${userId}/add_comment`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ comentario: textareaContent }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log("Texto enviado:", data.message || data.error);
+      if (userId && textareaContent !== "") {
+          localStorage.setItem("pendingComment", textareaContent); // Salva localmente
           document.getElementById("textareaInfo").style.display = "none";
           document.getElementById("button-enviar").style.display = "none";
-          document.getElementById("check").style.display = "block";
-        })
-        .catch(error => console.error("Erro ao enviar conteúdo:", error));
+          document.getElementById("loading").style.display = "block";
+          sendToServer(textareaContent);
       } else {
-        console.error("ID do usuário não definido");
+          console.error("ID do usuário não definido");
       }
-   }
+    }
+
+  function sendToServer(content) {
+    fetch(`https://tic-backend.onrender.com/qr_code_accesses/${userId}/add_comment`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ comentario: content }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Texto enviado:", data.message || data.error);
+        localStorage.removeItem("pendingComment"); // Remove ao enviar com sucesso
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("check").style.display = "block";
+    })
+    .catch(error => {
+        console.error("Erro ao enviar conteúdo:", error);
+        setTimeout(() => sendToServer(content), 5000); // Tenta novamente após 5 segundos
+    });
+  }
+
+  // Reenvia automaticamente ao carregar a página
+  window.onload = () => {
+      const pendingComment = localStorage.getItem("pendingComment");
+      if (pendingComment) {
+          sendToServer(pendingComment);
+      }
+  };
 
     window.onload = getUserIP;
   </script>
