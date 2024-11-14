@@ -87,10 +87,10 @@
     function sendTextareaContent() {
       const textareaContent = document.getElementById("textareaInfo").value;
       if (userId && textareaContent !== "") {
-          localStorage.setItem("pendingComment", textareaContent); // Salva localmente
-          document.getElementById("textareaInfo").style.display = "none";
+        document.getElementById("textareaInfo").style.display = "none";
           document.getElementById("button-enviar").style.display = "none";
           document.getElementById("loading").style.display = "block";
+          localStorage.setItem("pendingComment", textareaContent); // Salva localmente
           sendToServer(textareaContent);
       } else {
           console.error("ID do usuário não definido");
