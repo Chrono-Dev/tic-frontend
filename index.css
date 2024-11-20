@@ -76,6 +76,30 @@ body {
   }
 }
 
+.postPhoto{
+  width: clamp(300px, 20vw, 500px); /* Ajusta a largura conforme a tela */
+  height: clamp(280px, 25vh, 480px); /* Ajusta a altura conforme a tela */
+  background-size: contain; /* A imagem será redimensionada sem ser cortada */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Não repete a imagem */
+}
+
+/* Para telas de tablet ou superiores */
+@media (min-width: 768px) {
+  .postPhoto {
+    width: 75vh;      /* Imagens menores para que caibam mais na tela */
+    height: 50vh;    /* Ajuste da altura proporcionalmente */
+  }
+}
+
+/* Para telas grandes de computador */
+@media (min-width: 1024px) {
+  .postPhoto {
+    width: 100vh;      /* Imagens menores para que caibam mais na tela */
+    height: 75vh;    /* Ajuste da altura proporcionalmente */
+  }
+}
+
 .textarea-info{
   width: 100%;
   min-height: 80px;
